@@ -4,6 +4,4 @@ before_install:
   chmod +x gradlew
 
 notifications:
-  slack: 'historyphone:ohp3bD1IJRUGaQRZJLa8o9cD'
-    on_success: never
-    on_failure: always
+  slack: historyphone:ohp3bD1IJRUGaQRZJLa8o9cD
