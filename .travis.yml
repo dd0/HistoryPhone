@@ -5,4 +5,3 @@ before_install:
 
 notifications:
   slack: historyphone:ohp3bD1IJRUGaQRZJLa8o9cD
-    on_success: never
