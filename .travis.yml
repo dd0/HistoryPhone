@@ -1,3 +1,5 @@
 language: java
 before_install:
  - chmod +x gradlew
+ notifications:
+  slack: historyphone:ohp3bD1IJRUGaQRZJLa8o9cD
