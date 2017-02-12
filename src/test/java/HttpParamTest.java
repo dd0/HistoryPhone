@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.io.IOException;
 
 public class HttpParamTest {
-    @Test public void httpParamTest() {
+    @Test public void httpTest() {
         try {
             //runs the parse method with the sample string
             HashMap<String, String> testMap1 = (HashMap<String,String>) HttpParameters.parse("param1=val1&param2=val2");
