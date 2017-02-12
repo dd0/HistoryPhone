@@ -8,6 +8,15 @@
 
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "uk.ac.cam.cl.historyphone.Server"
+
+run {
+    // workaround for easier testing -- start server at localhost,
+    // port 12345 when running "gradle run"
+    args = ["localhost", "12345"]
+}
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -17,8 +26,9 @@ repositories {
 }
 
 dependencies {
-    // The production code uses Guava
-    compile 'com.google.guava:guava:20.0'
+    // The production code uses Guava and JSON
+    compile 'com.google.guava:guava:20.0' 
+    compile group: 'javax.json', name: 'javax.json-api', version: '1.0'
 
     // Use JUnit test framework
     testCompile 'junit:junit:4.12'
