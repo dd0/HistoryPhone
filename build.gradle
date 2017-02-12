@@ -26,9 +26,9 @@ repositories {
 }
 
 dependencies {
-    // The production code uses Guava and JSON
     compile 'com.google.guava:guava:20.0' 
-    compile group: 'javax.json', name: 'javax.json-api', version: '1.0'
+    compile group: 'org.glassfish', name: 'javax.json', version: '1.0.4'
+    compile group: 'org.hsqldb', name: 'hsqldb', version: '2.3.4'
 
     // Use JUnit test framework
     testCompile 'junit:junit:4.12'

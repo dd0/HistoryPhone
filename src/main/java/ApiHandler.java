@@ -7,24 +7,43 @@ import java.util.Map;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.SQLException;
 
 class ApiHandler implements HttpHandler {
 
 	private Server server;
+	private Database database;
 
-	public ApiHandler(Server s) {
+	public ApiHandler(Server s, Database db) {
 		server = s;
+		database = db;
 	}	
 
-	public void sendResponse(HttpExchange ex, int statusCode, String resp) throws IOException {
+	private void sendResponse(HttpExchange ex, int statusCode, ApiResponse resp) throws IOException {
+		String respText = resp.toJson();
 		ex.getResponseHeaders().add("Content-Type", "text/json");
-		ex.sendResponseHeaders(statusCode, resp.getBytes().length);
+		ex.sendResponseHeaders(statusCode, respText.getBytes().length);
 		
 		OutputStream out = ex.getResponseBody();
-		out.write(resp.getBytes());
+		out.write(respText.getBytes());
 		out.close();
 	}
 
+	private void handleInfo(HttpExchange ex, int objectID) throws IOException {
+		try {
+		    ObjectInfo res = database.getObjectInfo(Integer.toString(objectID));
+			if(res != null) {
+				sendResponse(ex, 200, res);
+			}
+			else {
+				sendResponse(ex, 404, new ErrorResponse(
+								 "Object with ID " + Integer.toString(objectID) + " not found"));
+			}
+		} catch(SQLException e) {
+		    sendResponse(ex, 500, new ErrorResponse("Error doing a database lookup: " + e.getMessage()));
+		}
+	}
+	
 	// Responses are currently hard-coded placeholders, should
 	// delegate to other components once they are implemented
 	public void handle(HttpExchange ex) {
@@ -32,7 +51,7 @@ class ApiHandler implements HttpHandler {
 		
 		try {
 			if(!ex.getRequestMethod().equals("GET")) {
-				sendResponse(ex, 404, "Request method is not GET");
+				sendResponse(ex, 400, new ErrorResponse("Request method is not GET"));
 				return;
 			}
 			
@@ -40,28 +59,28 @@ class ApiHandler implements HttpHandler {
 			Map<String, String> params = HttpParameters.parse(request.getQuery());
 
 			if(method.equals("/api/response")) {
-				String reply = "{\n    \"response\": \"" + params.get("message") + "\"\n}";
-				sendResponse(ex, 200, reply);
+				// placeholder until a response system is implemented
+				sendResponse(ex, 200, new ChatResponse(params.get("message")));
 			} else if(method.equals("/api/info")) {
 				try {
 					int objectID = Integer.parseInt(params.get("id"));
-					sendResponse(ex, 200, String.format("Data about object %d...", objectID));
+					handleInfo(ex, objectID);
 				} catch(NumberFormatException e) {
-					sendResponse(ex, 404, "Could not parse ID " + params.get("id"));
+					sendResponse(ex, 400, new ErrorResponse("Could not parse ID " + params.get("id")));
 				}
 			}
 			else {
-				sendResponse(ex, 404, "Nonexistent API call " + method);
+				sendResponse(ex, 404, new ErrorResponse("Nonexistent API call " + method));
 			}
-		} catch(IOException e) {
+		} catch(Exception e) {
 			System.err.println("Exception handling request " + request.toString());
 			e.printStackTrace();
 			
 			try {
 				// Try to notify the client of the exception (if this
 				// fails as well, stop trying)
-				sendResponse(ex, 404, e.getMessage());
-			} catch(IOException err) {
+				sendResponse(ex, 500, new ErrorResponse(e.getMessage()));
+			} catch(Exception err) {
 				System.err.println("Exception while trying to report details of previous exception");
 				err.printStackTrace();
 			}

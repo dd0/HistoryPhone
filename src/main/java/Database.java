@@ -1,4 +1,4 @@
-package HistoryPhone;
+package uk.ac.cam.cl.historyphone;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,11 +10,43 @@ import java.sql.Statement;
 public class Database {
 	
 	// Variable storing DB connection.
-	private static Connection connection;
-	
-	// Variable storing database path.
-	private static String DBName = "/Users/AdminDK/Desktop/db/NewDB";
-	
+	private Connection connection;
+
+	public Database(String dbName) throws InitFailedException {
+		try {
+			// Load the HSQLDB driver and load/create the database with the appropriate name.
+			Class.forName("org.hsqldb.jdbcDriver");
+			
+			// Initialize connection with appropriate values.
+			connection = DriverManager.getConnection("jdbc:hsqldb:file:"
+													 + dbName,"SA","");
+		
+		
+			Statement delayStmt = connection.createStatement();
+		
+			try {
+				//Always update data on disk
+				delayStmt.execute("SET WRITE_DELAY FALSE");
+			} finally {
+				delayStmt.close();
+			}		
+			
+			// Ensure that a transaction commit is controlled manually.
+			connection.setAutoCommit(false);
+		} catch(Exception e) {
+			throw new InitFailedException("DB initialisation failed", e);
+		}
+	}
+
+	public void close() {
+		try {
+			connection.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/*
 	public static void main(String args[]) throws SQLException, ClassNotFoundException { 
 			
 		// Load the HSQLDB driver and load/create the database with the appropriate name.
@@ -46,10 +78,7 @@ public class Database {
 		if (obj != null) {
 			
 			// Print out its details.
-			System.out.println("UUID: " + obj.getUUID());
-			System.out.println("Name: " + obj.getName());
-			System.out.println("Desc: " + obj.getDesc());
-			System.out.println("URL:  " + obj.getImg());
+			System.out.println(obj.toJson());
 			
 		} else {	
 			
@@ -63,10 +92,10 @@ public class Database {
 		connection.close();
 
 	}
-	
+	*/
 
 	
-	public static ObjectInfo getObjectInfo(String UUID) throws SQLException { 
+	public ObjectInfo getObjectInfo(String UUID) throws SQLException { 
 		
 		// Check if UUID sent is null.
 		if ((UUID == null) || (UUID == "")) {
