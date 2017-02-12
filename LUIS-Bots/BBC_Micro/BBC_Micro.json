@@ -1,0 +1,373 @@
+{
+  "luis_schema_version": "1.3.1",
+  "versionId": "0.1",
+  "name": "BBC_Micro",
+  "desc": "BBC Micro chatbot.",
+  "culture": "en-us",
+  "intents": [
+    {
+      "name": "Get Predecessor"
+    },
+    {
+      "name": "GetCreationTime"
+    },
+    {
+      "name": "GetCreator"
+    },
+    {
+      "name": "GetGoal"
+    },
+    {
+      "name": "GetGreeting"
+    },
+    {
+      "name": "GetPurchase"
+    },
+    {
+      "name": "GetSuccess"
+    },
+    {
+      "name": "GetSummary"
+    },
+    {
+      "name": "None"
+    }
+  ],
+  "entities": [
+    {
+      "name": "BBC Micro"
+    },
+    {
+      "name": "Creators",
+      "children": [
+        "Steve Furber",
+        "Team (others)",
+        "Sophie Wilson"
+      ]
+    },
+    {
+      "name": "Greeting"
+    },
+    {
+      "name": "Predecessor"
+    }
+  ],
+  "composites": [],
+  "closedLists": [],
+  "bing_entities": [],
+  "actions": [],
+  "model_features": [],
+  "regex_features": [],
+  "utterances": [
+    {
+      "text": "roses are red, violets are blue.",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "this is not a question.",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "how many of you are there?",
+      "intent": "None",
+      "entities": [
+        {
+          "entity": "BBC Micro",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "what is your favourite sorting algorithm?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "would you like a raisin? how about a date?",
+      "intent": "None",
+      "entities": [
+        {
+          "entity": "BBC Micro",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "how much did you cost?",
+      "intent": "GetPurchase",
+      "entities": [
+        {
+          "entity": "BBC Micro",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "who created you?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "BBC Micro",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "who made you?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "BBC Micro",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "were you made by steve furber?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "Creators::Steve Furber",
+          "startPos": 4,
+          "endPos": 5
+        },
+        {
+          "entity": "BBC Micro",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "did the acorn team design you?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "Creators::Team (others)",
+          "startPos": 2,
+          "endPos": 2
+        },
+        {
+          "entity": "BBC Micro",
+          "startPos": 5,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "what model did acorn have before you?",
+      "intent": "Get Predecessor",
+      "entities": [
+        {
+          "entity": "Creators::Team (others)",
+          "startPos": 3,
+          "endPos": 3
+        },
+        {
+          "entity": "BBC Micro",
+          "startPos": 6,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "how are you better than your predecessor?",
+      "intent": "Get Predecessor",
+      "entities": [
+        {
+          "entity": "BBC Micro",
+          "startPos": 2,
+          "endPos": 2
+        },
+        {
+          "entity": "Predecessor",
+          "startPos": 6,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "why were you created?",
+      "intent": "GetGoal",
+      "entities": [
+        {
+          "entity": "BBC Micro",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "why were you made?",
+      "intent": "GetGoal",
+      "entities": [
+        {
+          "entity": "BBC Micro",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "what were you used for?",
+      "intent": "GetGoal",
+      "entities": [
+        {
+          "entity": "BBC Micro",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "hello.",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting",
+          "startPos": 0,
+          "endPos": 0
+        }
+      ]
+    },
+    {
+      "text": "hi.",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting",
+          "startPos": 0,
+          "endPos": 0
+        }
+      ]
+    },
+    {
+      "text": "when were you created?",
+      "intent": "GetCreationTime",
+      "entities": [
+        {
+          "entity": "BBC Micro",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "how old are you?",
+      "intent": "GetCreationTime",
+      "entities": [
+        {
+          "entity": "BBC Micro",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "why are you famous?",
+      "intent": "GetSuccess",
+      "entities": [
+        {
+          "entity": "BBC Micro",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "what is so special about yourself?",
+      "intent": "GetSuccess",
+      "entities": [
+        {
+          "entity": "BBC Micro",
+          "startPos": 5,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "did many people use you?",
+      "intent": "GetSuccess",
+      "entities": [
+        {
+          "entity": "BBC Micro",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "what are you?",
+      "intent": "GetSummary",
+      "entities": [
+        {
+          "entity": "BBC Micro",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "how do you work?",
+      "intent": "GetSummary",
+      "entities": [
+        {
+          "entity": "BBC Micro",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "what can you tell me about yourself?",
+      "intent": "GetSummary",
+      "entities": [
+        {
+          "entity": "BBC Micro",
+          "startPos": 6,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "how much do you cost?",
+      "intent": "GetPurchase",
+      "entities": [
+        {
+          "entity": "BBC Micro",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "can i get one of you?",
+      "intent": "GetPurchase",
+      "entities": [
+        {
+          "entity": "BBC Micro",
+          "startPos": 5,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "can i buy you?",
+      "intent": "GetPurchase",
+      "entities": [
+        {
+          "entity": "BBC Micro",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    }
+  ]
+}
