@@ -40,6 +40,7 @@ class ApiHandler implements HttpHandler {
 								 "Object with ID " + Integer.toString(objectID) + " not found"));
 			}
 		} catch(SQLException e) {
+			e.printStackTrace();
 		    sendResponse(ex, 500, new ErrorResponse("Error doing a database lookup: " + e.getMessage()));
 		}
 	}

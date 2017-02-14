@@ -8,7 +8,8 @@ class Server {
 
 	private HttpServer connection;
 	private Database database;
-
+	private IntentExtractor intentExtractor;
+	
 	// Default database path to use if there is none provided on the
 	// command line.
 	private static String defaultDB = "db/data";
@@ -26,8 +27,11 @@ class Server {
 		connection.createContext("/img/", new ImageHandler(this));		
 	}
 	
-	private Server(String host, int port, String dbPath) throws InitFailedException {
-		database = new Database(dbPath);
+	private Server(String host, int port) throws InitFailedException {
+		Configuration config = new Configuration("config.json");
+
+		intentExtractor = new IntentExtractor(config.getAppID(), config.getSubscriptionKey());
+		database = new Database(config.getDatabasePath());
 		initConnection(host, port);
 	}
 
@@ -41,21 +45,24 @@ class Server {
 	}
 	
 	public static void main(String[] args) {
-		if(args.length != 2 && args.length != 3) {
+		if(args.length != 2) {
 			System.err.println("Usage: Server <address> <port>");
 			return;
 		}
-
+		
 		String host = args[0];
 		int port = Integer.parseInt(args[1]);
-		String dbPath = args.length >= 3 ? args[2] : defaultDB;
-
+		
 		try {
-		    Server s = new Server(host, port, dbPath);
+		    Server s = new Server(host, port);
 			try {
 				s.start();
 			} finally {
-				s.stop();
+				// todo: see if this can be done in some other way
+				// s.start() is non-blocking, so s.stop() will be
+				// called immediately
+
+				//s.stop();
 			}
 		} catch(InitFailedException e) {
 			e.printStackTrace();

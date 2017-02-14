@@ -25,21 +25,22 @@ class ImageHandler implements HttpHandler {
 			return false;
 		}
 
-		// todo: don't open the file twice?
-	    File tmp = new File("images/" + path);
-		return tmp.exists();
+		return true;
 	}
 
-	// todo: refactor
-	public void sendResponse(HttpExchange ex, int statusCode, String path) throws IOException {
-		ex.getResponseHeaders().add("Content-Type", "image/png");
-		if(path == null) {
-			// todo: do this in a more reasonable way
-			ex.sendResponseHeaders(statusCode, 0);
-			ex.getResponseBody().close();
+	public void sendError(HttpExchange ex, int statusCode) throws IOException {
+		// empty response -> no header
+		ex.sendResponseHeaders(statusCode, 0);
+		ex.getResponseBody().close();
+	}
+	
+	public void sendImage(HttpExchange ex, int statusCode, String path) throws IOException {
+		File f = new File(path);
+		
+		if(!f.exists()) {
+			sendError(ex, 404);
 		} else {
-			File f = new File(path);
-			
+			ex.getResponseHeaders().add("Content-Type", "image/png");
 			ex.sendResponseHeaders(statusCode, f.length());
 			OutputStream out = ex.getResponseBody();
 			Files.copy(f.toPath(), out);
@@ -54,9 +55,9 @@ class ImageHandler implements HttpHandler {
 
 		try {
 			if(pathValid(path)) {
-				sendResponse(ex, 200, "images/" + path);
+				sendImage(ex, 200, "images/" + path);
 			} else {
-				sendResponse(ex, 404, null);
+				sendError(ex, 404);
 			}
 		} catch(Exception e) {e.printStackTrace(); }
 	}
