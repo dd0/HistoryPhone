@@ -76,6 +76,8 @@ class ApiHandler implements HttpHandler {
 					response = database.getResponse(uuid, key);
 				} catch (SQLException s) {
 					s.printStackTrace();
+				} catch (LookupException l) {
+					response = "I am not a real object :(";
 				}
 				if (response == null) {
 					//TODO: prompt user to rephrase...

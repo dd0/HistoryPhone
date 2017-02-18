@@ -94,7 +94,7 @@ public class Database {
 	}
 	*/
 
-	public String getResponse(long uuid, String key) throws SQLException{
+	public String getResponse(long uuid, String key) throws SQLException, LookupException{
 		String stmt = "SELECT value FROM responses WHERE key = " + "'" + key + "' AND uuid = " + "'" + uuid + "'";
 
 			// Create appropriate prepare statement.
@@ -109,7 +109,7 @@ public class Database {
 				if(rs.next()) {
 					return rs.getString(1);
 				} else {
-					return null;
+					throw new LookupException("Bot Doesn't Exist");
 				}
 			} finally {
 				rs.close();
