@@ -69,7 +69,7 @@ class ApiHandler implements HttpHandler {
 
 				//app will send message "init" when conversation is first opened.
 				if (params.get("message").equals("init")) {
-					key = "GetGreeting";
+					key = "GetGreeting+Generic+1";
 				}
 				//retrieve the response.
 				try {
