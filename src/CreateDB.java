@@ -44,10 +44,10 @@ public class CreateDB {
 			System.out.println("Warning: Database table already exists.");
 		}
 
-		//create the table for querying responses
+		//create the table for querying responses (uuid stored as strings)
 		try {
 			sqlStmt.execute("DROP TABLE responses");
-            sqlStmt.execute("CREATE TABLE responses(key VARCHAR(255) NOT NULL, value VARCHAR(4096) NOT NULL)");
+            sqlStmt.execute("CREATE TABLE responses(uuid VARCHAR(30), key VARCHAR(255) NOT NULL, value VARCHAR(4096) NOT NULL)");
             connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,46 +85,49 @@ public class CreateDB {
 			insertMessage.close();
 		}
 
-		String stmt2 = "INSERT INTO responses(key, value) VALUES (?,?)";
+		String stmt2 = "INSERT INTO responses(uuid, key, value) VALUES (?,?,?)";
 		PreparedStatement insertMessage1 = connection.prepareStatement(stmt2);
 
 		try {//TODO Add all responses along with variations
-			insertMessage1.setString(1, "GetGreeting");
-			insertMessage1.setString(2, "Hi There Friend");
+			insertMessage1.setString(1,"123");
+			insertMessage1.setString(2, "GetGreeting");
+			insertMessage1.setString(3, "Hi There Friend");
 			insertMessage1.executeUpdate();
 
-			insertMessage1.setString(1, "GetGreeting+Generic+1");
-			insertMessage1.setString(2, "Hi There generic person");
+			insertMessage1.setString(1,"123");
+			insertMessage1.setString(2, "GetGreeting+Generic+1");
+			insertMessage1.setString(3, "Hi There generic person");
 			insertMessage1.executeUpdate();
 
-			insertMessage1.setString(1, "GetGreeting+Generic+2");
-			insertMessage1.setString(2, "Yo waddup");
+			insertMessage1.setString(1,"123");
+			insertMessage1.setString(2, "GetGreeting+Generic+2");
+			insertMessage1.setString(3, "Yo waddup");
 			insertMessage1.executeUpdate();
 			//Create strings containing the results.
 
-			//How to query a result...
-			// Prepare appropriate connection statement.
-			String stmt = "SELECT value FROM responses WHERE key = " + "'GetGreeting+Generic+1'";
-
-			// Create appropriate prepare statement.
-			PreparedStatement prepStmt = connection.prepareStatement(stmt);
-
-			try {
-				// Extract matching table records.
-				ResultSet rs = prepStmt.executeQuery();
-
-				// Store information in the declared string variables.
-				try {
-					while(rs.next()) {
-						System.out.println(rs.getString(1));
-					}
-				} finally {
-					rs.close();
-				}
-
-			} finally {
-				prepStmt.close();
-			}
+			// //How to query a result...
+			// // Prepare appropriate connection statement.
+			// String stmt = "SELECT value FROM responses WHERE key = " + "'GetGreeting+Generic+1'";
+			//
+			// // Create appropriate prepare statement.
+			// PreparedStatement prepStmt = connection.prepareStatement(stmt);
+			//
+			// try {
+			// 	// Extract matching table records.
+			// 	ResultSet rs = prepStmt.executeQuery();
+			//
+			// 	// Store information in the declared string variables.
+			// 	try {
+			// 		while(rs.next()) {
+			// 			System.out.println(rs.getString(1));
+			// 		}
+			// 	} finally {
+			// 		rs.close();
+			// 	}
+			//
+			// } finally {
+			// 	prepStmt.close();
+			// }
 
 		} finally {
 			insertMessage1.close();

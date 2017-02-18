@@ -62,13 +62,18 @@ class ApiHandler implements HttpHandler {
 			if(method.equals("/api/response")) {
 				//TODO: Put in actual id and subscription key
 				IntentExtractor intentExtractor = new IntentExtractor("1","1");
-				//get the relevant key for the message
-				String key = intentExtractor.getKey(params.get("message"));
-
+				//get the relevant key for the message and the bot
+				long uuid = Long.valueOf(params.get("uuid"));
+				String key = intentExtractor.getKey(uuid, params.get("message"));
 				String response = null;
+
+				//app will send message "init" when conversation is first opened.
+				if (params.get("message").equals("init")) {
+					key = "GetGreeting";
+				}
 				//retrieve the response.
 				try {
-					response = database.getResponse(key);
+					response = database.getResponse(uuid, key);
 				} catch (SQLException s) {
 					s.printStackTrace();
 				}

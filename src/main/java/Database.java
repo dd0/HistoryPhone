@@ -94,8 +94,8 @@ public class Database {
 	}
 	*/
 
-	public String getResponse(String key) throws SQLException{
-		String stmt = "SELECT value FROM responses WHERE key = " + "'" + key + "'";
+	public String getResponse(long uuid, String key) throws SQLException{
+		String stmt = "SELECT value FROM responses WHERE key = " + "'" + key + "' AND uuid = " + "'" + uuid + "'";
 
 			// Create appropriate prepare statement.
 			PreparedStatement prepStmt = connection.prepareStatement(stmt);
