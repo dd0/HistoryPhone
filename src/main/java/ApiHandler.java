@@ -17,13 +17,13 @@ class ApiHandler implements HttpHandler {
 	public ApiHandler(Server s, Database db) {
 		server = s;
 		database = db;
-	}	
+	}
 
 	private void sendResponse(HttpExchange ex, int statusCode, ApiResponse resp) throws IOException {
 		String respText = resp.toJson();
 		ex.getResponseHeaders().add("Content-Type", "text/json");
 		ex.sendResponseHeaders(statusCode, respText.getBytes().length);
-		
+
 		OutputStream out = ex.getResponseBody();
 		out.write(respText.getBytes());
 		out.close();
@@ -44,24 +44,41 @@ class ApiHandler implements HttpHandler {
 		    sendResponse(ex, 500, new ErrorResponse("Error doing a database lookup: " + e.getMessage()));
 		}
 	}
-	
+
 	// Responses are currently hard-coded placeholders, should
 	// delegate to other components once they are implemented
 	public void handle(HttpExchange ex) {
 		URI request = ex.getRequestURI();
-		
+
 		try {
 			if(!ex.getRequestMethod().equals("GET")) {
 				sendResponse(ex, 400, new ErrorResponse("Request method is not GET"));
 				return;
 			}
-			
+
 			String method = request.getPath();
 			Map<String, String> params = HttpParameters.parse(request.getQuery());
 
 			if(method.equals("/api/response")) {
-				// placeholder until a response system is implemented
-				sendResponse(ex, 200, new ChatResponse(params.get("message")));
+				//TODO: Put in actual id and subscription key
+				IntentExtractor intentExtractor = new IntentExtractor("1","1");
+				//get the relevant key for the message
+				String key = intentExtractor.getKey(params.get("message"));
+
+				String response = null;
+				//retrieve the response.
+				try {
+					response = database.getResponse(key);
+				} catch (SQLException s) {
+					s.printStackTrace();
+				}
+				if (response == null) {
+					//TODO: prompt user to rephrase...
+					sendResponse(ex, 200, new ChatResponse("Sorry I don't understand - please rephrase the question!"));
+				} else {
+					sendResponse(ex, 200, new ChatResponse(response));
+				}
+
 			} else if(method.equals("/api/info")) {
 				try {
 					int objectID = Integer.parseInt(params.get("id"));
@@ -76,7 +93,7 @@ class ApiHandler implements HttpHandler {
 		} catch(Exception e) {
 			System.err.println("Exception handling request " + request.toString());
 			e.printStackTrace();
-			
+
 			try {
 				// Try to notify the client of the exception (if this
 				// fails as well, stop trying)
@@ -87,5 +104,5 @@ class ApiHandler implements HttpHandler {
 			}
 		}
 	}
-	
+
 }
