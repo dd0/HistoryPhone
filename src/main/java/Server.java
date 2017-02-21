@@ -23,7 +23,7 @@ class Server {
 			throw new InitFailedException("HttpServer creation failed", e);
 		}
 		
-		connection.createContext("/api/", new ApiHandler(this, database));
+		connection.createContext("/api/", new ApiHandler(this, database, intentExtractor));
 		connection.createContext("/img/", new ImageHandler(this));		
 	}
 	

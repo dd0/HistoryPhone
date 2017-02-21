@@ -13,10 +13,12 @@ class ApiHandler implements HttpHandler {
 
 	private Server server;
 	private Database database;
+	private IntentExtractor intentExtractor;
 
-	public ApiHandler(Server s, Database db) {
+	public ApiHandler(Server s, Database db, IntentExtractor ie) {
 		server = s;
 		database = db;
+		intentExtractor = ie;
 	}	
 
 	private void sendResponse(HttpExchange ex, int statusCode, ApiResponse resp) throws IOException {
