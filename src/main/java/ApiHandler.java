@@ -25,7 +25,7 @@ class ApiHandler implements HttpHandler {
 		String respText = resp.toJson();
 		ex.getResponseHeaders().add("Content-Type", "text/json");
 		ex.sendResponseHeaders(statusCode, respText.getBytes().length);
-		
+
 		OutputStream out = ex.getResponseBody();
 		out.write(respText.getBytes());
 		out.close();
@@ -46,24 +46,48 @@ class ApiHandler implements HttpHandler {
 		    sendResponse(ex, 500, new ErrorResponse("Error doing a database lookup: " + e.getMessage()));
 		}
 	}
-	
+
 	// Responses are currently hard-coded placeholders, should
 	// delegate to other components once they are implemented
 	public void handle(HttpExchange ex) {
 		URI request = ex.getRequestURI();
-		
+
 		try {
 			if(!ex.getRequestMethod().equals("GET")) {
 				sendResponse(ex, 400, new ErrorResponse("Request method is not GET"));
 				return;
 			}
-			
+
 			String method = request.getPath();
 			Map<String, String> params = HttpParameters.parse(request.getQuery());
 
 			if(method.equals("/api/response")) {
-				// placeholder until a response system is implemented
-				sendResponse(ex, 200, new ChatResponse(params.get("message")));
+				//TODO: Put in actual id and subscription key
+				IntentExtractor intentExtractor = new IntentExtractor("1","1");
+				//get the relevant key for the message and the bot
+				long uuid = Long.valueOf(params.get("uuid"));
+				String key = intentExtractor.getKey(uuid, params.get("message"));
+				String response = null;
+
+				//app will send message "init" when conversation is first opened.
+				if (params.get("message").equals("init")) {
+					key = "GetGreeting+Generic+1";
+				}
+				//retrieve the response.
+				try {
+					response = database.getResponse(uuid, key);
+				} catch (SQLException s) {
+					s.printStackTrace();
+				} catch (LookupException l) {
+					response = "I am not a real object :(";
+				}
+				if (response == null) {
+					//TODO: prompt user to rephrase...
+					sendResponse(ex, 200, new ChatResponse("Sorry I don't understand - please rephrase the question!"));
+				} else {
+					sendResponse(ex, 200, new ChatResponse(response));
+				}
+
 			} else if(method.equals("/api/info")) {
 				try {
 					int objectID = Integer.parseInt(params.get("id"));
@@ -78,7 +102,7 @@ class ApiHandler implements HttpHandler {
 		} catch(Exception e) {
 			System.err.println("Exception handling request " + request.toString());
 			e.printStackTrace();
-			
+
 			try {
 				// Try to notify the client of the exception (if this
 				// fails as well, stop trying)
@@ -89,5 +113,5 @@ class ApiHandler implements HttpHandler {
 			}
 		}
 	}
-	
+
 }
