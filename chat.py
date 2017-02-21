@@ -1,5 +1,4 @@
 import requests
-import readline
 import json
 import argparse
 
