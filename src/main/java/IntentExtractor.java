@@ -45,9 +45,8 @@ class IntentExtractor {
 
 	//getKey will take a message and return a string encoding the key for the relevant response
 	//the return string will be of the form 'intent(+entities(+rand#))'
-	public String getKey(long uuid, String message) {
-		//TODO: fill in this method!
-		return "GetGreeting";
+	public String getKey(long uuid, String message) throws RemoteQueryException {
+		return getTopIntent(message).getName();
 	}
 
 	public List<Intent> getIntents(String message) throws RemoteQueryException {

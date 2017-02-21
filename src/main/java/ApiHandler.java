@@ -19,7 +19,7 @@ class ApiHandler implements HttpHandler {
 		server = s;
 		database = db;
 		intentExtractor = ie;
-	}	
+	}
 
 	private void sendResponse(HttpExchange ex, int statusCode, ApiResponse resp) throws IOException {
 		String respText = resp.toJson();
@@ -62,8 +62,6 @@ class ApiHandler implements HttpHandler {
 			Map<String, String> params = HttpParameters.parse(request.getQuery());
 
 			if(method.equals("/api/response")) {
-				//TODO: Put in actual id and subscription key
-				IntentExtractor intentExtractor = new IntentExtractor("1","1");
 				//get the relevant key for the message and the bot
 				long uuid = Long.valueOf(params.get("uuid"));
 				String key = intentExtractor.getKey(uuid, params.get("message"));
@@ -82,7 +80,7 @@ class ApiHandler implements HttpHandler {
 					response = "I am not a real object :(";
 				}
 				if (response == null) {
-					//TODO: prompt user to rephrase...
+					//prompt user to rephrase...
 					sendResponse(ex, 200, new ChatResponse("Sorry I don't understand - please rephrase the question!"));
 				} else {
 					sendResponse(ex, 200, new ChatResponse(response));
