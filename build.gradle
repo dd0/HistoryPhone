@@ -13,9 +13,7 @@ apply plugin: 'application'
 mainClassName = "uk.ac.cam.cl.historyphone.Server"
 
 run {
-    // workaround for easier testing -- start server at localhost,
-    // port 12345 when running "gradle run"
-    args = ["localhost", "12345"]
+    args = ["config.json"]
 }
 
 // In this section you declare where to find the dependencies of your project

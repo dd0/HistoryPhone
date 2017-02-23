@@ -10,10 +10,6 @@ class Server {
 	private Database database;
 	private IntentExtractor intentExtractor;
 	
-	// Default database path to use if there is none provided on the
-	// command line.
-	private static String defaultDB = "db/data";
-
 	private void initConnection(String host, int port) throws InitFailedException {
 		InetSocketAddress addr = new InetSocketAddress(host, port);
 
@@ -27,13 +23,13 @@ class Server {
 		connection.createContext("/img/", new ImageHandler(this));		
 	}
 	
-	private Server(String host, int port) throws InitFailedException {
-		Configuration config = new Configuration("config.json");
+	private Server(String configFile) throws InitFailedException {
+		Configuration config = new Configuration(configFile);
 
 		intentExtractor = new IntentExtractor(config.getAppID(), config.getSubscriptionKey());
 		database = new Database(config.getDatabasePath());
 			
-		initConnection(host, port);
+		initConnection(config.getHost(), config.getPort());
 	}
 
 	private void start() {
@@ -46,16 +42,13 @@ class Server {
 	}
 	
 	public static void main(String[] args) {
-		if(args.length != 2) {
-			System.err.println("Usage: Server <address> <port>");
+		if(args.length != 1) {
+			System.err.println("Usage: Server <config>");
 			return;
 		}
-		
-		String host = args[0];
-		int port = Integer.parseInt(args[1]);
-		
+	    
 		try {
-		    Server s = new Server(host, port);
+		    Server s = new Server(args[0]);
 			try {
 				s.start();
 			} finally {
