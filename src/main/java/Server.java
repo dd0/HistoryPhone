@@ -32,6 +32,7 @@ class Server {
 
 		intentExtractor = new IntentExtractor(config.getAppID(), config.getSubscriptionKey());
 		database = new Database(config.getDatabasePath());
+			
 		initConnection(host, port);
 	}
 
