@@ -1,7 +1,6 @@
 package uk.ac.cam.cl.historyphone;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
@@ -15,6 +14,7 @@ class IntentExtractor {
 
 	private String appID;
 	private String subscriptionKey;
+	private Map<String, List<String>> map; //used to check if intent is associated with a certain entity
 
 	private static String BASE_URL =
 		"https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/%s?subscription-key=%s&q=%s&verbose=true";
@@ -22,6 +22,29 @@ class IntentExtractor {
 	public IntentExtractor(String id, String key) {
 		appID = id;
 		subscriptionKey = key;
+		//use map of string to list of strings to check if a given set of entites can be associated with a given intent
+		//if data set were larger, could use a database instead
+		map = new HashMap<String, List<String>>();
+		LinkedList<String> greet = new LinkedList<String>();
+		greet.add("Generic");
+		greet.add("HowDoYouDo");
+		map.put("GetGreeting", greet);
+
+		LinkedList<String> create = new LinkedList<String>();
+		greet.add("Team");
+		greet.add("SteveFurber");
+		greet.add("SophieWilson");
+		map.put("GetCreator", create);
+
+		LinkedList<String> feat = new LinkedList<String>();
+		greet.add("CPU");
+		greet.add("Storage");
+		greet.add("Display");
+		greet.add("OS");
+		greet.add("RAM");
+		greet.add("Keyboard");
+		greet.add("Sound");
+		map.put("GetFeature", feat);
 	}
 
     private JsonObject getRawData(String message) throws RemoteQueryException {
@@ -50,14 +73,31 @@ class IntentExtractor {
 				res.addEntity(new Entity(e));
 			}
 		}
-		
+
 		return res;
 	}
 
-	//getKey will take a message and return a string encoding the key for the relevant response
-	//the return string will be of the form 'intent(+entities(+rand#))'
-	public String getKey(long uuid, String message) throws RemoteQueryException {
-		return getTopIntent(message).getName();
-	}
+	//getKey will take a message and return a 'DBQuery' object to describe the correct lookup.
+	public DBQuery getDBQ(long uuid, String message) throws RemoteQueryException {
+		Intent originalIntent = getTopIntent(message);
+		String intent = originalIntent.getName();
+		List<Entity> entList = originalIntent.getEntities();
+		//Sort list with highest ranking entities first
+		Collections.sort(entList, new Comparator<Entity>() {
+				@Override
+				public int compare(Entity ent1, Entity ent2) {
+					return ((int)ent1.getScore()) - ((int)ent2.getScore());
+				}
+		});
+		List<String> realEntList = map.get(intent);
 
+		for(Entity e : entList) { //check if there are valid entities in the query
+			String entName = e.getName();
+			if (realEntList.contains(entName)) {
+				return new DBQuery(intent, entName);
+			}
+		}
+		//return result with no entity associated
+		return new DBQuery(intent);
+	}
 }

@@ -94,8 +94,13 @@ public class Database {
 	}
 	*/
 
-	public String getResponse(long uuid, String key) throws SQLException, LookupException{
-		String stmt = "SELECT value FROM responses WHERE key = " + "'" + key + "' AND uuid = " + "'" + uuid + "'";
+	public String getResponse(long uuid, DBQuery dBQ) throws SQLException, LookupException{
+		String stmt;
+		if (dBQ.hasEntity()){//there is an entity associated with this response
+			stmt = String.format("SELECT response FROM responses WHERE intent = '%s' AND entity = '%s' AND uuid = '%s'",dBQ.getIntent(), dBQ.getEntity(), uuid);
+		} else {
+			stmt = String.format("SELECT response FROM responses WHERE intent = '%s' AND entity = '%s' AND uuid = '%s'",dBQ.getIntent(), "NONE", uuid);
+		}
 
 			// Create appropriate prepare statement.
 			PreparedStatement prepStmt = connection.prepareStatement(stmt);
@@ -105,7 +110,7 @@ public class Database {
 			ResultSet rs = prepStmt.executeQuery();
 
 			// Store information in the declared string variables.
-			try {
+			try {//return random entry if there are multiple
 				if(rs.next()) {
 					return rs.getString(1);
 				} else {

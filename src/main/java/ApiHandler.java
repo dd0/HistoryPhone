@@ -64,16 +64,19 @@ class ApiHandler implements HttpHandler {
 			if(method.equals("/api/response")) {
 				//get the relevant key for the message and the bot
 				long uuid = Long.valueOf(params.get("uuid"));
-				String key = intentExtractor.getKey(uuid, params.get("message"));
+				DBQuery dBQ = intentExtractor.getDBQ(uuid, params.get("message"));
 				String response = null;
+				if (dBQ.hasEntity()) {//Lookup intent and entity pair
+
+				}
 
 				//app will send message "init" when conversation is first opened.
 				if (params.get("message").equals("init")) {
-					key = "GetGreeting+Generic+1";
+					dBQ = new DBQuery("init");
 				}
 				//retrieve the response.
 				try {
-					response = database.getResponse(uuid, key);
+					response = database.getResponse(uuid, dBQ);
 				} catch (SQLException s) {
 					s.printStackTrace();
 				} catch (LookupException l) {
