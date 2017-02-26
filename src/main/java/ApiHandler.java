@@ -47,8 +47,20 @@ class ApiHandler implements HttpHandler {
 		}
 	}
 
-	// Responses are currently hard-coded placeholders, should
-	// delegate to other components once they are implemented
+	private void handleSuggestion(HttpExchange ex, int objectID) throws IOException {
+		try {
+			String res = database.getSuggestion(objectID);
+			if(res != null) {
+				sendResponse(ex, 200, new SuggestionResponse(res));
+			} else {
+				sendResponse(ex, 404, new ErrorResponse("No suggestions for ID " + Integer.toString(objectID)));
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			sendResponse(ex, 500, new ErrorResponse("Error doing a database lookup: " + e.getMessage()));
+		}
+	}
+	
 	public void handle(HttpExchange ex) {
 		URI request = ex.getRequestURI();
 
@@ -96,8 +108,14 @@ class ApiHandler implements HttpHandler {
 				} catch(NumberFormatException e) {
 					sendResponse(ex, 400, new ErrorResponse("Could not parse ID " + params.get("id")));
 				}
-			}
-			else {
+			} else if(method.equals("/api/suggestion")) {
+				try {
+					int objectID = Integer.parseInt(params.get("id")); // todo: no reason for this not to be String
+					handleSuggestion(ex, objectID);
+				} catch(NumberFormatException e) {
+					sendResponse(ex, 400, new ErrorResponse("Could not parse ID " + params.get("id")));
+				}
+			} else {
 				sendResponse(ex, 404, new ErrorResponse("Nonexistent API call " + method));
 			}
 		} catch(Exception e) {

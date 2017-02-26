@@ -47,54 +47,18 @@ public class Database {
 		}
 	}
 
-	/*
-	public static void main(String args[]) throws SQLException, ClassNotFoundException {
-
-		// Load the HSQLDB driver and load/create the database with the appropriate name.
-		Class.forName("org.hsqldb.jdbcDriver");
-
-		// Initialize connection with appropriate values.
-		connection = DriverManager.getConnection("jdbc:hsqldb:file:"
-								+ DBName,"SA","");
-
-
-		Statement delayStmt = connection.createStatement();
-
-		try {
-			//Always update data on disk
-			delayStmt.execute("SET WRITE_DELAY FALSE");
-		} finally {
-			delayStmt.close();
-		}
-
-		// Ensure that a transaction commit is controlled manually.
-		connection.setAutoCommit(false);
-
-
-		// Extract object.
-		ObjectInfo obj = getObjectInfo("123");
-
-
-		// Check if object was found.
-		if (obj != null) {
-
-			// Print out its details.
-			System.out.println(obj.toJson());
-
+	public String getSuggestion(int id) throws SQLException {
+		PreparedStatement stmt = connection.prepareStatement("SELECT text FROM suggestions WHERE uuid = ? ORDER BY RAND() LIMIT 1");
+		stmt.setInt(1, id);
+		
+		ResultSet res = stmt.executeQuery();
+		if(res.next()) {
+			return res.getString(1);
 		} else {
-
-			// Or error statement.
-			System.err.println("Object not found");
+			return null;
 		}
-
-
-
-		// Close database connection.
-		connection.close();
-
 	}
-	*/
-
+	
 	public String getResponse(long uuid, DBQuery dBQ) throws SQLException, LookupException{
 		String stmt;
 		if (dBQ.hasEntity()){//there is an entity associated with this response
