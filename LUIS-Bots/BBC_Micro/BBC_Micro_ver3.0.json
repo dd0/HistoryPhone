@@ -1,0 +1,1871 @@
+{
+  "luis_schema_version": "1.3.1",
+  "versionId": "0.1",
+  "name": "BBC_Micro",
+  "desc": "BBC Micro chatbot.",
+  "culture": "en-us",
+  "intents": [
+    {
+      "name": "GetCreationTime"
+    },
+    {
+      "name": "GetCreator"
+    },
+    {
+      "name": "GetFeature"
+    },
+    {
+      "name": "GetGoal"
+    },
+    {
+      "name": "GetGreeting"
+    },
+    {
+      "name": "GetPurchase"
+    },
+    {
+      "name": "GetSuccess"
+    },
+    {
+      "name": "GetSummary"
+    },
+    {
+      "name": "None"
+    }
+  ],
+  "entities": [
+    {
+      "name": "Application"
+    },
+    {
+      "name": "CreatorQuery"
+    },
+    {
+      "name": "Creators",
+      "children": [
+        "Team (others)",
+        "Steve Furber",
+        "Sophie Wilson"
+      ]
+    },
+    {
+      "name": "Feature",
+      "children": [
+        "CPU",
+        "Storage",
+        "Display",
+        "OS",
+        "RAM/ROM",
+        "Keyboard",
+        "Sound"
+      ]
+    },
+    {
+      "name": "Greeting",
+      "children": [
+        "Generic",
+        "HowDoYouDo"
+      ]
+    },
+    {
+      "name": "Posession"
+    },
+    {
+      "name": "SuccessIndicator"
+    },
+    {
+      "name": "Time"
+    }
+  ],
+  "composites": [],
+  "closedLists": [],
+  "bing_entities": [],
+  "actions": [],
+  "model_features": [
+    {
+      "name": "Application",
+      "mode": true,
+      "words": "use you,used,use,used for,applied,utilized,make you,create you,made for",
+      "activated": true
+    },
+    {
+      "name": "Created",
+      "mode": true,
+      "words": "built,made,created,designed,constructed,make,design,construct,build",
+      "activated": true
+    },
+    {
+      "name": "Creator",
+      "mode": false,
+      "words": "Sophie Wilson,Sophie,Steve Furber,Furber,Steve,Team,Acorn Team,BBC,creator,creators,makers",
+      "activated": true
+    },
+    {
+      "name": "Features",
+      "mode": false,
+      "words": "screen,monitor,display,keyboard,keys,buttons,button,sound,speaker,CPU,central processing unit,OS,operating system,storage,RAM,ROM,disk,processor,main memory,memory",
+      "activated": true
+    },
+    {
+      "name": "GenericGreeting",
+      "mode": true,
+      "words": "Hi,Hey,hi,hey,greetings,hello",
+      "activated": true
+    },
+    {
+      "name": "HowDoYouDo",
+      "mode": true,
+      "words": "How are you,how ' re you,how are you feeling,how are you today,how are you,how are you ?,how are you doing",
+      "activated": true
+    },
+    {
+      "name": "Price",
+      "mode": true,
+      "words": "price,cost",
+      "activated": true
+    },
+    {
+      "name": "Purchase",
+      "mode": true,
+      "words": "buy,get,acquire",
+      "activated": true
+    },
+    {
+      "name": "Success",
+      "mode": true,
+      "words": "famous,special,superior,successful,popular,well - known,many people use",
+      "activated": true
+    }
+  ],
+  "regex_features": [],
+  "utterances": [
+    {
+      "text": "roses are red, violets are blue.",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "how many of you are there?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "do you exist in other colors?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "enter text here",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "w",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "would you like a raisin? how about a date?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "do you hear weird questions often?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "what is your favourite sorting algorithm?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "this is not a question.",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "can you be used for playing games?",
+      "intent": "GetGoal",
+      "entities": [
+        {
+          "entity": "Application",
+          "startPos": 3,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "tell me something interesting.",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "what model did acorn have before you?",
+      "intent": "None",
+      "entities": [
+        {
+          "entity": "Creators::Team (others)",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "how are you better than your predecessor?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "what was before you?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "testing",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "what is the extent of your capabilities?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "what",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "bonjour",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "who",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "why were you named 'micro'?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "eoufeouf",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "sedcfyvguyxrcfyvguhiby",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "are you a turing machine?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "how are you living in this life?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "test.",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "are you a typewriter?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "init",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "exit",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "good day",
+      "intent": "None",
+      "entities": [
+        {
+          "entity": "Greeting::Generic",
+          "startPos": 0,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "testing this mess.",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "how many transistors do you have?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "how much do you weigh?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "test",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "what is this?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "this is a test",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "are you turing complete?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "can i connect a mouse?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "what's the return button?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "why were you discontinued?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "train.",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "entities.",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "what do you look like?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "do you have a usb port?",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "what features do you have",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "were you made by steve furber?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 2,
+          "endPos": 3
+        },
+        {
+          "entity": "Creators::Steve Furber",
+          "startPos": 4,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "did the acorn team design you?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 4,
+          "endPos": 5
+        },
+        {
+          "entity": "Creators::Team (others)",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "who made you?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 1,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "who created you?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "were you made by bbc?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 2,
+          "endPos": 2
+        },
+        {
+          "entity": "Creators",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "what's with bbc being in your name?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "Creators",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "who made you",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 1,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "where were you made",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "were you built by engineers?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 2,
+          "endPos": 2
+        },
+        {
+          "entity": "Creators",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "did bbc make you?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 2,
+          "endPos": 2
+        },
+        {
+          "entity": "Creators::Team (others)",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "who built you?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "what’s with bbc being in your name?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "Creators",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "what’s with 'bbc' being in your name?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "Creators::Team (others)",
+          "startPos": 5,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "what's with 'bbc' being in your name?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "Creators::Team (others)",
+          "startPos": 5,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "who is steve furber?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "Creators::Steve Furber",
+          "startPos": 2,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "what team made you?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 2,
+          "endPos": 3
+        },
+        {
+          "entity": "Creators::Team (others)",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "who is steve furber",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "Creators::Steve Furber",
+          "startPos": 2,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "who is your creator, steve furber?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 3,
+          "endPos": 3
+        },
+        {
+          "entity": "Creators::Steve Furber",
+          "startPos": 5,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "what can you tell me about steve furber?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "Creators::Steve Furber",
+          "startPos": 6,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "is steve furber your creator?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "Creators::Steve Furber",
+          "startPos": 1,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "who is sophie wilson?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "Creators::Sophie Wilson",
+          "startPos": 2,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "did sophie wilson create you?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 3,
+          "endPos": 3
+        },
+        {
+          "entity": "Creators::Sophie Wilson",
+          "startPos": 1,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "did sophie wilson design you?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 3,
+          "endPos": 3
+        },
+        {
+          "entity": "Creators::Sophie Wilson",
+          "startPos": 1,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "what does sophie wilson do?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "Creators::Sophie Wilson",
+          "startPos": 2,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "were you created by bbc?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 2,
+          "endPos": 2
+        },
+        {
+          "entity": "Creators::Team (others)",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "what team were you at?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "Creators::Team (others)",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "were you made by a team?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 2,
+          "endPos": 2
+        },
+        {
+          "entity": "Creators::Team (others)",
+          "startPos": 5,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "where you made by a team?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 2,
+          "endPos": 3
+        },
+        {
+          "entity": "Creators::Team (others)",
+          "startPos": 5,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "did steve furber make you?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 3,
+          "endPos": 3
+        },
+        {
+          "entity": "Creators::Steve Furber",
+          "startPos": 1,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "who is the acorn team?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "Creators::Team (others)",
+          "startPos": 3,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "who is your creator steve furber",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 3,
+          "endPos": 3
+        },
+        {
+          "entity": "Creators::Steve Furber",
+          "startPos": 4,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "what team created you",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 2,
+          "endPos": 3
+        },
+        {
+          "entity": "Creators::Team (others)",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "who is your creator",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "Creators::Team (others)",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "who created you",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "what team created you?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 2,
+          "endPos": 2
+        },
+        {
+          "entity": "Creators::Team (others)",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "who is sophie wilson",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "Creators::Sophie Wilson",
+          "startPos": 2,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "were you created by bbc team?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 2,
+          "endPos": 2
+        },
+        {
+          "entity": "Creators::Team (others)",
+          "startPos": 4,
+          "endPos": 4
+        },
+        {
+          "entity": "Creators::Team (others)",
+          "startPos": 5,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "were you created by steve furber?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 2,
+          "endPos": 2
+        },
+        {
+          "entity": "Creators::Steve Furber",
+          "startPos": 4,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "were you created by sophie wilson?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 2,
+          "endPos": 2
+        },
+        {
+          "entity": "Creators::Sophie Wilson",
+          "startPos": 4,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "steve furber?",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "Creators::Steve Furber",
+          "startPos": 0,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "did steve furber make you",
+      "intent": "GetCreator",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 3,
+          "endPos": 3
+        },
+        {
+          "entity": "Creators::Steve Furber",
+          "startPos": 1,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "how much did you cost?",
+      "intent": "GetPurchase",
+      "entities": [
+        {
+          "entity": "Posession",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "can i get one of you?",
+      "intent": "GetPurchase",
+      "entities": [
+        {
+          "entity": "Posession",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "how much do you cost?",
+      "intent": "GetPurchase",
+      "entities": [
+        {
+          "entity": "Posession",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "can i buy you?",
+      "intent": "GetPurchase",
+      "entities": [
+        {
+          "entity": "Posession",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "what's your price?",
+      "intent": "GetPurchase",
+      "entities": [
+        {
+          "entity": "Posession",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "where can i buy you",
+      "intent": "GetPurchase",
+      "entities": [
+        {
+          "entity": "Posession",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "where can i buy you?",
+      "intent": "GetPurchase",
+      "entities": [
+        {
+          "entity": "Posession",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "how are you?",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::HowDoYouDo",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "hi.",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::Generic",
+          "startPos": 0,
+          "endPos": 0
+        }
+      ]
+    },
+    {
+      "text": "how do you do?",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::HowDoYouDo",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "hello.",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::Generic",
+          "startPos": 0,
+          "endPos": 0
+        }
+      ]
+    },
+    {
+      "text": "how are you feeling today?",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::HowDoYouDo",
+          "startPos": 0,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "hey.",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::Generic",
+          "startPos": 0,
+          "endPos": 0
+        }
+      ]
+    },
+    {
+      "text": "hi",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::Generic",
+          "startPos": 0,
+          "endPos": 0
+        }
+      ]
+    },
+    {
+      "text": "how are you",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::HowDoYouDo",
+          "startPos": 0,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "how're you doing?",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::HowDoYouDo",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "hi, how're you doing?",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::Generic",
+          "startPos": 0,
+          "endPos": 0
+        },
+        {
+          "entity": "Greeting::HowDoYouDo",
+          "startPos": 1,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "hello",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::Generic",
+          "startPos": 0,
+          "endPos": 0
+        }
+      ]
+    },
+    {
+      "text": "hi there",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::Generic",
+          "startPos": 0,
+          "endPos": 0
+        }
+      ]
+    },
+    {
+      "text": "hi ther",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::Generic",
+          "startPos": 0,
+          "endPos": 0
+        }
+      ]
+    },
+    {
+      "text": "hi, how are you?",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::HowDoYouDo",
+          "startPos": 1,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "how do you do",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::HowDoYouDo",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "how are you ?",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::HowDoYouDo",
+          "startPos": 0,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "how are you doing",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::HowDoYouDo",
+          "startPos": 0,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "hello there",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::Generic",
+          "startPos": 0,
+          "endPos": 0
+        }
+      ]
+    },
+    {
+      "text": "how are you today?",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::HowDoYouDo",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "how're you?",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::HowDoYouDo",
+          "startPos": 0,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "how are you doing?",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::HowDoYouDo",
+          "startPos": 0,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "hello there'",
+      "intent": "GetGreeting",
+      "entities": [
+        {
+          "entity": "Greeting::Generic",
+          "startPos": 0,
+          "endPos": 0
+        }
+      ]
+    },
+    {
+      "text": "how were you used?",
+      "intent": "GetGoal",
+      "entities": [
+        {
+          "entity": "Application",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "why were you created?",
+      "intent": "GetGoal",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "what did people use you for?",
+      "intent": "GetGoal",
+      "entities": [
+        {
+          "entity": "Application",
+          "startPos": 3,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "why were you made?",
+      "intent": "GetGoal",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "what were you used for?",
+      "intent": "GetGoal",
+      "entities": [
+        {
+          "entity": "Application",
+          "startPos": 3,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "what were you made for",
+      "intent": "GetGoal",
+      "entities": [
+        {
+          "entity": "Application",
+          "startPos": 3,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "why were you built?",
+      "intent": "GetGoal",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "why did bbc make you?",
+      "intent": "GetGoal",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 3,
+          "endPos": 3
+        },
+        {
+          "entity": "Creators::Team (others)",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "what can you tell me about yourself?",
+      "intent": "GetSummary",
+      "entities": []
+    },
+    {
+      "text": "what are you?",
+      "intent": "GetSummary",
+      "entities": []
+    },
+    {
+      "text": "what object are you?",
+      "intent": "GetSummary",
+      "entities": []
+    },
+    {
+      "text": "how do you work?",
+      "intent": "GetSummary",
+      "entities": []
+    },
+    {
+      "text": "who are you?",
+      "intent": "GetSummary",
+      "entities": []
+    },
+    {
+      "text": "tell me about yourself.",
+      "intent": "GetSummary",
+      "entities": []
+    },
+    {
+      "text": "what are you",
+      "intent": "GetSummary",
+      "entities": []
+    },
+    {
+      "text": "why are you famous?",
+      "intent": "GetSuccess",
+      "entities": [
+        {
+          "entity": "SuccessIndicator",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "are you famous?",
+      "intent": "GetSuccess",
+      "entities": [
+        {
+          "entity": "SuccessIndicator",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "what is so special about yourself?",
+      "intent": "GetSuccess",
+      "entities": [
+        {
+          "entity": "SuccessIndicator",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "did many people use you?",
+      "intent": "GetSuccess",
+      "entities": [
+        {
+          "entity": "SuccessIndicator",
+          "startPos": 1,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "are you well-known?",
+      "intent": "GetSuccess",
+      "entities": [
+        {
+          "entity": "SuccessIndicator",
+          "startPos": 2,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "were you famous?",
+      "intent": "GetSuccess",
+      "entities": [
+        {
+          "entity": "SuccessIndicator",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "how old are you?",
+      "intent": "GetCreationTime",
+      "entities": [
+        {
+          "entity": "Time",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "when were you created?",
+      "intent": "GetCreationTime",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 3,
+          "endPos": 3
+        },
+        {
+          "entity": "Time",
+          "startPos": 0,
+          "endPos": 0
+        }
+      ]
+    },
+    {
+      "text": "when were you made?",
+      "intent": "GetCreationTime",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 3,
+          "endPos": 3
+        },
+        {
+          "entity": "Time",
+          "startPos": 0,
+          "endPos": 0
+        }
+      ]
+    },
+    {
+      "text": "what is your age?",
+      "intent": "GetCreationTime",
+      "entities": [
+        {
+          "entity": "Time",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "when were you built?",
+      "intent": "GetCreationTime",
+      "entities": [
+        {
+          "entity": "CreatorQuery",
+          "startPos": 3,
+          "endPos": 3
+        },
+        {
+          "entity": "Time",
+          "startPos": 0,
+          "endPos": 0
+        }
+      ]
+    },
+    {
+      "text": "when were you born?",
+      "intent": "GetCreationTime",
+      "entities": [
+        {
+          "entity": "Time",
+          "startPos": 0,
+          "endPos": 0
+        }
+      ]
+    },
+    {
+      "text": "where were you born?",
+      "intent": "GetCreationTime",
+      "entities": [
+        {
+          "entity": "Time",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "what is your operating system?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::OS",
+          "startPos": 3,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "what operating system are you running?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::OS",
+          "startPos": 1,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "how much ram do you have?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::RAM/ROM",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "where is your display?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::Display",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "how much storage do you have?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::Storage",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "why are your keyboard keys red?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::Keyboard",
+          "startPos": 3,
+          "endPos": 3
+        },
+        {
+          "entity": "Feature::Keyboard",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "where are your speakers?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::Sound",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "what os do you have?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::OS",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "what storage are you using?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::Storage",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "do you have a monitor?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::Display",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "where are the speakers?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::Sound",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "how much rom do you have?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::RAM/ROM",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "what is your cpu?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::CPU",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "do you have a central processing unit?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::CPU",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "what is your cpu clock rate?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::CPU",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "why are those buttons red?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::Keyboard",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "why is there no screen?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::Display",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "why are the function keys red?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::Keyboard",
+          "startPos": 3,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "why are there no speakers?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::Sound",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "why is there no '@' key?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::Keyboard",
+          "startPos": 7,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "what os are you running?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::OS",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "how much memory do you have?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::RAM/ROM",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "what cpu do you have",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::CPU",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "where is your screen?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::Display",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "where is your screen",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::Display",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "where is your keyboard",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::Keyboard",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "where's your screen",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::Display",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "what cpu do you have?",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::CPU",
+          "startPos": 1,
+          "endPos": 1
+        }
+      ]
+    },
+    {
+      "text": "what do your buttons do",
+      "intent": "GetFeature",
+      "entities": [
+        {
+          "entity": "Feature::Keyboard",
+          "startPos": 3,
+          "endPos": 3
+        }
+      ]
+    }
+  ]
+}
