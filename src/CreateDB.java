@@ -164,19 +164,19 @@ public class CreateDB {
 
 			insertMessage1.setString(1,"123");
 			insertMessage1.setString(2, "GetCreator");
-			insertMessage1.setString(3, "Team");
+			insertMessage1.setString(3, "Team (others)");
 			insertMessage1.setString(4, "I was created by the Acorn team - namely Sophie Wilson and Steve Furber. As motivation, they were both told that the other had agreed that they could prototype me in a week. Surprisingly this trick paid off!");
 			insertMessage1.executeUpdate();
 
 			insertMessage1.setString(1,"123");
 			insertMessage1.setString(2, "GetCreator");
-			insertMessage1.setString(3, "SteveFurber");
+			insertMessage1.setString(3, "Steve Furber");
 			insertMessage1.setString(4, "My Creator - Steve Furber, who now works at the University of Manchester - is well known for making me, and developing the ARM 32-bit RISC microprocessor.\nHe studied Maths at St. John's College Cambridge. I know right, what a loser!");
 			insertMessage1.executeUpdate();
 
 			insertMessage1.setString(1,"123");
 			insertMessage1.setString(2, "GetCreator");
-			insertMessage1.setString(3, "SophieWilson");
+			insertMessage1.setString(3, "Sophie Wilson");
 			insertMessage1.setString(4, "My Creator - Sophie Wilson - decided to join Acorn Computers after designing a device which stopped people using cigarette lighters to win fruit machines.\nNowadays, she is a fellow at Selwyn College Cambridge.");
 			insertMessage1.executeUpdate();
 
@@ -224,7 +224,7 @@ public class CreateDB {
 
 			insertMessage1.setString(1,"123");
 			insertMessage1.setString(2, "GetFeature");
-			insertMessage1.setString(3, "RAM");
+			insertMessage1.setString(3, "RAM/ROM");
 			insertMessage1.setString(4, "I have 128kiB of RAM and 128KB of ROM.");
 			insertMessage1.executeUpdate();
 

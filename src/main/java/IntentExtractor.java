@@ -93,7 +93,7 @@ class IntentExtractor {
 
 		for(Entity e : entList) { //check if there are valid entities in the query
 			String entName = e.getName();
-			if (realEntList.contains(entName)) {
+			if (realEntList != null && realEntList.contains(entName)) {
 				return new DBQuery(intent, entName);
 			}
 		}

@@ -37,6 +37,9 @@ class Entity {
 
 	public Entity(JsonObject o) {
 		name = o.getString("type");
+		if (name.contains("::")) {
+			name = name.split("::")[1];
+		};
 		score = o.getJsonNumber("score").doubleValue();
 	}
 
