@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Random;
 
 public class Database {
 
@@ -97,9 +98,9 @@ public class Database {
 	public String getResponse(long uuid, DBQuery dBQ) throws SQLException, LookupException{
 		String stmt;
 		if (dBQ.hasEntity()){//there is an entity associated with this response
-			stmt = String.format("SELECT response FROM responses WHERE intent = '%s' AND entity = '%s' AND uuid = '%s'",dBQ.getIntent(), dBQ.getEntity(), uuid);
+			stmt = String.format("SELECT response FROM responses WHERE intent = '%s' AND entity = '%s' AND uuid = '%s' ORDER BY RAND() LIMIT 1",dBQ.getIntent(), dBQ.getEntity(), uuid);
 		} else {
-			stmt = String.format("SELECT response FROM responses WHERE intent = '%s' AND entity = '%s' AND uuid = '%s'",dBQ.getIntent(), "NONE", uuid);
+			stmt = String.format("SELECT response FROM responses WHERE intent = '%s' AND entity = '%s' AND uuid = '%s' ORDER BY RAND() LIMIT 1",dBQ.getIntent(), "NONE", uuid);
 		}
 
 			// Create appropriate prepare statement.
