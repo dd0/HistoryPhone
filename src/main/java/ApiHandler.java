@@ -80,7 +80,7 @@ class ApiHandler implements HttpHandler {
 				} catch (SQLException s) {
 					s.printStackTrace();
 				} catch (LookupException l) {
-					response = "I am not a real object :(";
+					response = "I can't understand sorry :(";
 				}
 				if (response == null) {
 					//prompt user to rephrase...
