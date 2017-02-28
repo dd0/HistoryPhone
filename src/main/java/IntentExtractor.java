@@ -26,24 +26,26 @@ class IntentExtractor {
 		//if data set were larger, could use a database instead
 		map = new HashMap<String, List<String>>();
 		LinkedList<String> greet = new LinkedList<String>();
-		greet.add("Generic");
+		greet.add("GenericGreeting");
 		greet.add("HowDoYouDo");
-		map.put("GetGreeting", greet);
+		greet.add("Name");
+		greet.add("Goodbye");
+		map.put("GetBasics", greet);
 
 		LinkedList<String> create = new LinkedList<String>();
-		greet.add("Team");
-		greet.add("SteveFurber");
-		greet.add("SophieWilson");
+		create.add("Team");
+		create.add("Steve Furber");
+		create.add("Sophie Wilson");
 		map.put("GetCreator", create);
 
 		LinkedList<String> feat = new LinkedList<String>();
-		greet.add("CPU");
-		greet.add("Storage");
-		greet.add("Display");
-		greet.add("OS");
-		greet.add("RAM");
-		greet.add("Keyboard");
-		greet.add("Sound");
+		feat.add("CPU");
+		feat.add("storage");
+		feat.add("display");
+		feat.add("OS");
+		feat.add("ram/rom");
+		feat.add("keyboard");
+		feat.add("sound");
 		map.put("GetFeature", feat);
 	}
 
@@ -93,8 +95,13 @@ class IntentExtractor {
 
 		for(Entity e : entList) { //check if there are valid entities in the query
 			String entName = e.getName();
-			if (realEntList != null && realEntList.contains(entName)) {
-				return new DBQuery(intent, entName);
+			System.out.println("LUIS returns entity: " + entName);
+			if (realEntList != null) {
+				for (String storedEntName : realEntList) {
+					if (storedEntName.equalsIgnoreCase(entName)){
+						return new DBQuery(intent, entName);
+					}
+				}
 			}
 		}
 		//return result with no entity associated
