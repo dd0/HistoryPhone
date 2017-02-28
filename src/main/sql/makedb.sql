@@ -17,7 +17,7 @@ INSERT INTO responses VALUES
        ('56', 'GetBasics', 'NONE', 'Hello!'),
        ('56', 'GetBasics', 'Name', 'My name is ''BBC Micro.'''),
        ('56', 'GetBasics', 'GenericGreeting', 'Greetings.'),
-       ('56', 'GetBasics', 'Goodbye', 'Goodbye for now!'),
+       ('56', 'GetBasics', 'GoodBye', 'Goodbye for now!'),
        ('56', 'GetBasics', 'GenericGreeting', 'I salute thee, oh anonymous carbon-based, sentient life form.'),
        ('56', 'GetBasics', 'GenericGreeting', 'Yo waddup'),
        ('56', 'GetBasics', 'HowDoYouDo', 'I have been locked in a box for decades, detached from the outside world. I am thus doing quite well.'),
