@@ -47,16 +47,35 @@ public class Database {
 		}
 	}
 
-	public String getSuggestion(int id) throws SQLException {
-		PreparedStatement stmt = connection.prepareStatement("SELECT text FROM suggestions WHERE uuid = ? ORDER BY RAND() LIMIT 1");
-		stmt.setInt(1, id);
-		
-		ResultSet res = stmt.executeQuery();
-		if(res.next()) {
-			return res.getString(1);
-		} else {
-			return null;
+	public String getSuggestion(long uuid)  throws SQLException, LookupException {
+		String stmt;
+		stmt = String.format("SELECT text FROM suggestions WHERE uuid = '%s' ORDER BY RAND() LIMIT 1", uuid);
+
+		// Create appropriate prepare statement.
+		PreparedStatement prepStmt = connection.prepareStatement(stmt);
+
+		try {
+			// Extract matching table records.
+			ResultSet rs = prepStmt.executeQuery();
+
+			// Store information in the declared string variables.
+			try {//return random entry if there are multiple
+				if(rs.next()) {
+					return rs.getString(1);
+				} else {
+					throw new LookupException("Bot Doesn't Exist");
+				}
+			} finally {
+				rs.close();
+			}
+
+		} catch (SQLException s) {
+			System.out.println("SQL Error");
+			s.printStackTrace();
+		} finally {
+			prepStmt.close();
 		}
+		return null;
 	}
 	
 	public String getResponse(long uuid, DBQuery dBQ) throws SQLException, LookupException{
