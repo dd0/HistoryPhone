@@ -47,7 +47,7 @@ class ApiHandler implements HttpHandler {
 		}
 	}
 
-	private void handleSuggestion(HttpExchange ex, int objectID) throws IOException {
+	private void handleSuggestion(HttpExchange ex, int objectID) throws IOException, LookupException {
 		try {
 			String res = database.getSuggestion(objectID);
 			if(res != null) {
@@ -76,16 +76,25 @@ class ApiHandler implements HttpHandler {
 			if(method.equals("/api/response")) {
 				//get the relevant key for the message and the bot
 				long uuid = Long.valueOf(params.get("uuid"));
-				DBQuery dBQ = intentExtractor.getDBQ(uuid, params.get("message"));
 				String response = null;
+				//'init' is sent by the app when it wants a opening line/prompt message
+				if (params.get("message").equals("init")) {
+					try {
+						response = database.getSuggestion(uuid);
+						sendResponse(ex, 200, new ChatResponse(response));
+						return;
+					} catch (LookupException l) {//something has gone wrong
+						response = "this is not ideal... seems like your bot doesn't exist";
+						sendResponse(ex, 200, new ChatResponse(response));
+						return;
+					}
+				}
+
+				DBQuery dBQ = intentExtractor.getDBQ(uuid, params.get("message"));
 				if (dBQ.hasEntity()) {//Lookup intent and entity pair
 
 				}
-
-				//app will send message "init" when conversation is first opened.
-				if (params.get("message").equals("init")) {
-					dBQ = new DBQuery("init");
-				}
+				
 				//retrieve the response.
 				try {
 					response = database.getResponse(uuid, dBQ);
