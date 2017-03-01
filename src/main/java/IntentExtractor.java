@@ -49,6 +49,7 @@ class IntentExtractor {
 		map.put("GetFeature", feat);
 	}
 
+	//This method retireved a json object from the LUIS API
     private JsonObject getRawData(String message) throws RemoteQueryException {
 		try {
 			URL url = new URL(String.format(BASE_URL, appID, subscriptionKey, URLEncoder.encode(message, "UTF-8")));
@@ -97,6 +98,7 @@ class IntentExtractor {
 			String entName = e.getName();
 			System.out.println("LUIS returns entity: " + entName);
 			if (realEntList != null) {
+				//scan to see if the entites returned are ones which can be associated to the given intent.
 				for (String storedEntName : realEntList) {
 					if (storedEntName.equalsIgnoreCase(entName)){
 						return new DBQuery(intent, entName);
