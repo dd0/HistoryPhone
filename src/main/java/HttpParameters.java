@@ -20,15 +20,15 @@ class HttpParameters {
 		for(String param : rawParams.split("&")) {
 			String parts[] = param.split("=");
 			if(parts.length != 2) {
-				// todo: proper Exception
+				//This shouldn't ever happen
 				throw new IOException("Parsing error when splitting " + param);
 			}
-				
+
 			res.put(parts[0], URLDecoder.decode(parts[1], "UTF-8"));
 		}
-			
+
 		return res;
 	}
 
-	
+
 }

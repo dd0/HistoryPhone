@@ -8,6 +8,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
 
+
+/*
+This class is used for all the database lookup functionality
+*/
 public class Database {
 
 	// Variable storing DB connection.
@@ -47,6 +51,7 @@ public class Database {
 		}
 	}
 
+	//Lookup a user prompt from a given chatbot
 	public String getSuggestion(long uuid)  throws SQLException, LookupException {
 		String stmt;
 		stmt = String.format("SELECT text FROM suggestions WHERE uuid = '%s' ORDER BY RAND() LIMIT 1", uuid);
@@ -77,10 +82,11 @@ public class Database {
 		}
 		return null;
 	}
-	
+
+	//DBQuery will hold an intent (and entity) so lookup these in the database
 	public String getResponse(long uuid, DBQuery dBQ) throws SQLException, LookupException{
 		String stmt;
-		if (dBQ.hasEntity()){//there is an entity associated with this response
+		if (dBQ.hasEntity()){//check if there is an entity associated with this response
 			stmt = String.format("SELECT response FROM responses WHERE intent = '%s' AND entity = '%s' AND uuid = '%s' ORDER BY RAND() LIMIT 1",dBQ.getIntent(), dBQ.getEntity(), uuid);
 		} else {
 			stmt = String.format("SELECT response FROM responses WHERE intent = '%s' AND entity = '%s' AND uuid = '%s' ORDER BY RAND() LIMIT 1",dBQ.getIntent(), "NONE", uuid);
@@ -114,6 +120,7 @@ public class Database {
 
 	}
 
+	//lookup object info like name, description and image url (image url is not used - all object images are found at uuid.png)
 	public ObjectInfo getObjectInfo(String UUID) throws SQLException {
 
 		// Check if UUID sent is null.
