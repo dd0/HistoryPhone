@@ -1,6 +1,12 @@
 import requests
 import json
 import argparse
+import os
+
+# the Windows console crashes when writing Unicode characters, this
+# module is a fix for that
+if os.name == 'nt':
+    import win_unicode_console
 
 
 def get_reply(host, uuid, message, raw):
@@ -10,7 +16,7 @@ def get_reply(host, uuid, message, raw):
         if raw:
             return r.text
         else:
-            return json.loads(r.text)['message']
+            return json.loads(r.text)['message'].replace('\\n', '\n')
     else:
         return 'Error: %s' % r.status_code
 
@@ -24,6 +30,9 @@ def make_url(host):
 
 
 def main():
+    if os.name == 'nt':
+        win_unicode_console.enable()
+
     parser = argparse.ArgumentParser()
     parser.add_argument('host', help='address of the chat server (for example localhost:12345)')
     parser.add_argument('--uuid', required=True, nargs=1, help='UUID of the object to talk with')
@@ -31,7 +40,7 @@ def main():
     args = parser.parse_args()
 
     while True:
-        s = input('> ')
+        s = input('> ').strip()
         print(get_reply(make_url(args.host), args.uuid, s, args.raw))
 
 if __name__ == '__main__':
