@@ -157,6 +157,8 @@ class ApiHandler implements HttpHandler {
 				} catch(NumberFormatException e) {
 					sendResponse(ex, 400, new ErrorResponse("Could not parse ID " + params.get("id")));
 				}
+			//The app wants an object suggestions to prompt the user
+			//These are displayed whenever user opens up new chat window
 			} else if(method.equals("/api/suggestion")) {
 				try {
 					int objectID = Integer.parseInt(params.get("id")); // todo: no reason for this not to be String
