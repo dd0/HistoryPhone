@@ -27,6 +27,7 @@ class Intent {
 	public Intent(String _name, double _score) {
 		name = _name;
 		score = _score;
+		entities = new ArrayList<Entity>();
 	}
 
 	public void addEntity(Entity e) {
