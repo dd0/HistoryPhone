@@ -16,9 +16,9 @@ class IntentExtractor {
 	private String subscriptionKey;
 	private Map<String, List<String>> map; //used to check if intent is associated with a certain entity
 
-	private static String BASE_URL =
-		"https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/%s?subscription-key=%s&q=%s&verbose=true";
-
+	private static String BASE_URL = 
+		"https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/%s?subscription-key=%s&verbose=true&q=%s";
+		
 	public IntentExtractor(String id, String key) {
 		appID = id;
 		subscriptionKey = key;
