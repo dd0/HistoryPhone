@@ -19,7 +19,6 @@ public class IntentExtractorTest {
     // to avoid "too many HTTP Requests" error.
 
 	
-    @Ignore
     // Test whether getTopIntent returns the correct intent.
     @Test public void getTopIntent() throws RemoteQueryException, InterruptedException {
 
@@ -146,7 +145,8 @@ public class IntentExtractorTest {
 	    }
 	}
     
-    @Ignore
+
+	
     // Test whether the DBQ method correctly forms database queries given message text.
     @Test public void getDBQ() throws RemoteQueryException, InterruptedException {
 
