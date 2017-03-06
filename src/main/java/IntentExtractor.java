@@ -74,7 +74,7 @@ class IntentExtractor {
 
 		JsonArray entities = raw.getJsonArray("entities");
 		if(entities != null) {
-			// raw.getClass() -- stupid way to get Class<JsonObject>
+			// raw.getClass() -- way to get Class<JsonObject>
 			for(JsonObject e : entities.getValuesAs(raw.getClass())) {
 				res.addEntity(new Entity(e));
 			}
