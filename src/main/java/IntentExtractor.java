@@ -99,7 +99,6 @@ class IntentExtractor {
 
 		for(Entity e : entList) { //check if there are valid entities in the query
 			String entName = e.getName();
-			System.out.println("LUIS returns entity: " + entName);
 			if (realEntList != null) {
 				//scan to see if the entites returned are ones which can be associated to the given intent.
 				for (String storedEntName : realEntList) {
