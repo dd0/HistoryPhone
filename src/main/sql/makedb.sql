@@ -1,10 +1,10 @@
-DROP TABLE botInfo;
+DROP TABLE IF EXISTS botInfo;
 CREATE TABLE botInfo(uuid VARCHAR(30) NOT NULL, name VARCHAR(30) NOT NULL, description VARCHAR(300) NOT NULL, imageURL VARCHAR(4096) NOT NULL);
 
-DROP TABLE responses;
+DROP TABLE IF EXISTS responses;
 CREATE TABLE responses(uuid VARCHAR(30) NOT NULL, intent VARCHAR(255) NOT NULL, entity VARCHAR(255), response VARCHAR(5000) NOT NULL);
 
-DROP TABLE suggestions;
+DROP TABLE IF EXISTS suggestions;
 CREATE TABLE suggestions(uuid varchar(30) NOT NULL, text VARCHAR(1024) NOT NULL);
 
 INSERT INTO BotInfo VALUES('56', 'BBC Micro', 'I''m an educational computer built in the 80''s', '<filename>');
