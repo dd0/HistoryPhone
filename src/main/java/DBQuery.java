@@ -8,7 +8,6 @@ public class DBQuery {
 
 
     public DBQuery(String inte, String ent) {
-        System.out.println("New DBQuery with intent: " + inte + ", and entity: " + ent);
         this.intent = inte;
         this.entity = ent;
         this.hasEntity = true;
@@ -18,7 +17,6 @@ public class DBQuery {
         this.intent = inte;
         this.entity = null;
         this.hasEntity = false;
-        System.out.println("New DBQuery with intent: " + inte + ", and no entities");
     }
 
     public boolean hasEntity() {

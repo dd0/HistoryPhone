@@ -1,0 +1,8 @@
+{
+    "imageFolder": "build/resources/test/testimg/",
+    "databasePath": "build/test/db/testdb",
+    "nlpApplicationID": "",
+    "nlpSubscriptionKey": "",
+    "host": "localhost",
+    "port": 20476
+}

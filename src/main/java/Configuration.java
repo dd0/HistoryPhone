@@ -7,6 +7,10 @@ import javax.json.JsonReader;
 import javax.json.JsonNumber;
 import javax.json.Json;
 
+/**
+   Container for all configurable properties of the server. The
+   configuration is stored in a JSON-formatted file.
+ */
 class Configuration {
 
 	private String nlpAppID;
@@ -15,7 +19,16 @@ class Configuration {
 	private String dbPath;
 	private String host;
 	private int port;
-	
+
+	/**
+	   Read and parse a (JSON) configuration file. After this, all
+	   properties can be accessed using the appropriate getter
+	   methods.
+
+	   @param filename path to the configuration file
+	   @throws InitFailedException if the file does not exist or is
+	   not formatted properly (missing or malformed value).
+	 */
 	public Configuration(String filename) throws InitFailedException {
 		try {
 			JsonReader in = Json.createReader(new FileInputStream(filename));

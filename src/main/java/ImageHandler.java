@@ -13,9 +13,11 @@ import java.nio.file.Files;
 class ImageHandler implements HttpHandler {
 
 	private Server server;
+	private String folder;
 
-	public ImageHandler(Server s) {
+	public ImageHandler(Server s, String f) {
 		server = s;
+		folder = f;
 	}
 	
 	private boolean pathValid(String path) {
@@ -28,13 +30,13 @@ class ImageHandler implements HttpHandler {
 		return true;
 	}
 
-	public void sendError(HttpExchange ex, int statusCode) throws IOException {
+	private void sendError(HttpExchange ex, int statusCode) throws IOException {
 		// empty response -> no header
 		ex.sendResponseHeaders(statusCode, 0);
 		ex.getResponseBody().close();
 	}
 	
-	public void sendImage(HttpExchange ex, int statusCode, String path) throws IOException {
+    private void sendImage(HttpExchange ex, int statusCode, String path) throws IOException {
 		File f = new File(path);
 		
 		if(!f.exists()) {
@@ -55,7 +57,7 @@ class ImageHandler implements HttpHandler {
 
 		try {
 			if(pathValid(path)) {
-				sendImage(ex, 200, "images/" + path);
+				sendImage(ex, 200, folder + path);
 			} else {
 				sendError(ex, 404);
 			}

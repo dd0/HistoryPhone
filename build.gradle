@@ -9,12 +9,16 @@
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'eclipse'
+
+// "gradle run" should execute the server with the configuration from "config.json"
 
 mainClassName = "uk.ac.cam.cl.historyphone.Server"
-
 run {
     args = ["config.json"]
 }
+
+// tasks to build the runtime and test databases from SQL scripts
 
 configurations {
     createdb
@@ -24,7 +28,21 @@ task makeDatabase(type: JavaExec) {
      main = "org.hsqldb.cmdline.SqlTool"
      args = ["--inlineRC=url=jdbc:hsqldb:file:db/data,user=sa,password=", "src/main/sql/makedb.sql"]
      classpath configurations.createdb
+
+     inputs.files "src/main/sql/makedb.sql"
+     outputs.dir "db"
 }
+build.dependsOn makeDatabase
+
+task makeTestDatabase(type: JavaExec) {
+     main = "org.hsqldb.cmdline.SqlTool"
+     args = ["--inlineRC=url=jdbc:hsqldb:file:${buildDir}/test/db/testdb,user=sa,password=", "src/test/sql/testdb.sql"]
+     classpath configurations.createdb
+
+     inputs.files "src/test/sql/testdb.sql"
+     outputs.dir "${buildDir}/test/db"
+}
+test.dependsOn makeTestDatabase
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -43,5 +61,7 @@ dependencies {
 
     // Use JUnit test framework
     testCompile 'junit:junit:4.12'
+
+    testCompile group: 'org.glassfish', name: 'javax.json', version: '1.0.4'
 }
 

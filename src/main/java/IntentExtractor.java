@@ -10,6 +10,9 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.io.InputStream;
 
+/**
+   Wrapper around the LUIS NLP service.
+ */
 class IntentExtractor {
 
 	private String appID;
@@ -18,7 +21,7 @@ class IntentExtractor {
 
 	private static String BASE_URL = 
 		"https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/%s?subscription-key=%s&verbose=true&q=%s";
-		
+
 	public IntentExtractor(String id, String key) {
 		appID = id;
 		subscriptionKey = key;
