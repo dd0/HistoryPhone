@@ -112,7 +112,7 @@ public class IntentExtractorTest {
 
 		tmp = Json.createObjectBuilder().add("type", "CreatorQuery").add("score", 0.0).build(); 
 		int_actual.addEntity(new Entity(tmp));
-		tmp = Json.createObjectBuilder().add("type", "Creators").add("score", 0.0).build(); 
+		tmp = Json.createObjectBuilder().add("type", "Creators::Team").add("score", 0.0).build(); 
 		int_actual.addEntity(new Entity(tmp));
 			
 		Assert.assertEquals(int_test.getName(),  int_actual.getName());
