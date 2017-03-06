@@ -18,12 +18,8 @@ public class IntentExtractorTest {
     // Note: due to the server having low processing power, timeouts are written between every few tests
     // to avoid "too many HTTP Requests" error.
 
-    
-    
-    // REMOVE IGNORES!
-    @Ignore
-
-
+	
+	
     // Test whether getTopIntent returns the correct intent.
     @Test public void getTopIntent() throws RemoteQueryException, InterruptedException {
 
@@ -56,8 +52,8 @@ public class IntentExtractorTest {
 		
 
 		// Test with "GetGoal" intent.
-	    int_test = intEx.getTopIntent("Why were you built?");
-	    int_actual = new Intent("GetGoal", 0.8);
+	    	int_test = intEx.getTopIntent("Why were you built?");
+	    	int_actual = new Intent("GetGoal", 0.8);
 
 		tmp = Json.createObjectBuilder().add("type", "CreatorQuery").add("score", 0.0).build(); 
 		int_actual.addEntity(new Entity(tmp));
@@ -70,8 +66,8 @@ public class IntentExtractorTest {
 
 		// Test with "None" intent.
 		TimeUnit.MILLISECONDS.sleep(200);
-	    int_test = intEx.getTopIntent("Do you hear weird questions often?");
-	    int_actual = new Intent("None", 0.8);
+	    	int_test = intEx.getTopIntent("Do you hear weird questions often?");
+	    	int_actual = new Intent("None", 0.8);
 			
 		Assert.assertEquals(int_test.getName(),  int_actual.getName());
 		Assert.assertEquals(int_test.getScore() > 0.75, int_actual.getScore() > 0.75);	
@@ -80,13 +76,13 @@ public class IntentExtractorTest {
 
 
 		// Test with "GetFeature" intent.
-	    int_test = intEx.getTopIntent("What operating system do you use?");
-	    int_actual = new Intent("GetFeature", 0.8);
+		int_test = intEx.getTopIntent("What operating system do you use?");
+	    	int_actual = new Intent("GetFeature", 0.8);
 
-	    tmp = Json.createObjectBuilder().add("type", "Application").add("score", 0.0).build(); 
+	    	tmp = Json.createObjectBuilder().add("type", "Application").add("score", 0.0).build(); 
 		int_actual.addEntity(new Entity(tmp));
 
-	    tmp = Json.createObjectBuilder().add("type", "Feature::OS").add("score", 0.0).build(); 
+	    	tmp = Json.createObjectBuilder().add("type", "Feature::OS").add("score", 0.0).build(); 
 		int_actual.addEntity(new Entity(tmp));
 		
 		Assert.assertEquals(int_test.getName(),  int_actual.getName());
@@ -97,8 +93,8 @@ public class IntentExtractorTest {
 	       
 		// Test with "GetCreationTime" intent.
 		TimeUnit.MILLISECONDS.sleep(200);
-	    int_test = intEx.getTopIntent("When were you made?");
-	    int_actual = new Intent("GetCreationTime", 0.8);
+	    	int_test = intEx.getTopIntent("When were you made?");
+	   	int_actual = new Intent("GetCreationTime", 0.8);
 
 		tmp = Json.createObjectBuilder().add("type", "CreatorQuery").add("score", 0.0).build(); 
 		int_actual.addEntity(new Entity(tmp));
@@ -112,7 +108,7 @@ public class IntentExtractorTest {
 
 		// Test with "GetCreator" intent.
 		int_test = intEx.getTopIntent("Were you made by BBC?");
-	    int_actual = new Intent("GetCreator", 0.8);
+	    	int_actual = new Intent("GetCreator", 0.8);
 
 		tmp = Json.createObjectBuilder().add("type", "CreatorQuery").add("score", 0.0).build(); 
 		int_actual.addEntity(new Entity(tmp));
@@ -150,14 +146,6 @@ public class IntentExtractorTest {
 	    }
 	}
     
-    
-    
-    
-    @Ignore
-
-
-
-
     
     // Test whether the DBQ method correctly forms database queries given message text.
     @Test public void getDBQ() throws RemoteQueryException, InterruptedException {
