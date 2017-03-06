@@ -132,7 +132,7 @@ class ApiHandler implements HttpHandler {
 				sendResponse(ex, 400, new ErrorResponse("Request method is not GET"));
 				return;
 			}
-			//used for deciing type of query e.g. object info/chat response
+			//used for deciding type of query e.g. object info/chat response
 			String method = request.getPath();
 			//this get's a uuid and a message from a query. See HttpParameters.java
 			Map<String, String> params = HttpParameters.parse(request.getQuery());
