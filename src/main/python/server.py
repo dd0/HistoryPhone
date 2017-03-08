@@ -13,6 +13,7 @@ import requests
 # it once or twice during the demo
 questions = {}
 resp_queue = {}
+main_server = '192.168.15.123:17943'
 
 
 class handler(BaseHTTPRequestHandler):
@@ -31,8 +32,13 @@ class handler(BaseHTTPRequestHandler):
         questions[key] = msg
         resp_queue[key] = None
 
-        while resp_queue[key] is None:
+        for i in range(18):
+            if resp_queue[key] is not None:
+                break
             time.sleep(0.25)
+
+        if resp_queue[key] is None:
+            resp_queue[key] = 'Sorry, I don\'t understand.'
 
         res = json.dumps({'response': resp_queue[key]})
 
@@ -55,7 +61,7 @@ def main():
 
     cprint('Sending sethandler query... ', 'cyan', end='')
 
-    requests.get('http://localhost:12345/api/sethandler',
+    requests.get('http://%s/api/sethandler' % main_server,
                  params={'type': 'manual', 'port': port_num})
 
     cprint('Done.', 'green')
@@ -74,9 +80,16 @@ def main():
 
 
 def cleanup():
-    cprint('Exiting, switching back to LUIS...', 'cyan', end='')
-    requests.get('http://localhost:12345/api/sethandler',
+    cprint('Exiting, switching back to LUIS... ', 'cyan', end='')
+    requests.get('http://%s/api/sethandler' % main_server,
                  params={'type': 'luis'})
+    cprint('Done.', 'green')
+
+    cprint('Clearing the queue... ', 'cyan', end='')
+    for k in resp_queue.keys():
+        if resp_queue[k] is None:
+            resp_queue[k] = 'Sorry, I don\'t understand.'
+    time.sleep(1)
     cprint('Done.', 'green')
 
 if __name__ == '__main__':

@@ -124,6 +124,15 @@ class ApiHandler implements HttpHandler {
 			//this get's a uuid and a message from a query. See HttpParameters.java
 			Map<String, String> params = HttpParameters.parse(request.getQuery());
 
+			if(method.equals("/api/response")) {
+				if(params.get("message") == null) {
+					System.err.println("New message: " + "<null>");
+				} else {
+					System.err.println("New message: " + "\"" + params.get("message") + "\"");
+				}
+			} else {
+				System.err.println("New request: " + request.toString());
+			}
 			//This corresponds to requesting a response for the message sent
 			if(method.equals("/api/response")) {
 				try {

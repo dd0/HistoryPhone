@@ -8,8 +8,7 @@ DROP TABLE IF EXISTS suggestions;
 CREATE TABLE suggestions(uuid varchar(30) NOT NULL, text VARCHAR(1024) NOT NULL);
 
 INSERT INTO BotInfo VALUES('56', 'BBC Micro', 'I''m an educational computer built in the 80''s', '<filename>');
-INSERT INTO BotInfo VALUES('1234', 'Sample Bot Name 2.', 'This is the description of the second bot.', '<filename>');
-INSERT INTO BotInfo VALUES('12345', 'Sample Bot Name 3.', 'This is the description of the second bot.', '<filename>');
+INSERT INTO BotInfo VALUES('57', 'Raspberry Pi.', 'I''m a cheap educational single-board computer.', '<filename>');
 
 
 INSERT INTO responses VALUES
@@ -25,7 +24,7 @@ INSERT INTO responses VALUES
        ('56', 'GetCreationTime', 'NONE', 'I was first released on the 1st of December, 1981. I am thus just over 35 years old.'),
        ('56', 'GetSummary', 'NONE', 'I am BBC Micro, a home computer created by Acorn Computers Ltd for BBC.\nYou are only seeing my core components. You can connect a display and peripheral storage devices to me as well.\nI was built for educational purposes.\nI am notable for my ruggedness, expandability and the quality of my operating system.\nAs you can see, I also recently became a chatbot (I guess you can teach an old computer new tricks). '),
        ('56', 'GetGoal', 'NONE', 'I was designed for educational purposes.\nIn 1982 BBC launched the ''BBC Computer Literacy Project'', with an aim of educating people in the world of computing.\nBesides having a television series and a book associated with the project, BBC wanted a microcomputer to be used, to provide a direct experience.\nAcorn Computers won the contract for being the provider of such a microcomputer.\nAfter winning, these guys then went on to create me in order to fulfill their contract.'),
-       ('56', 'GetPurchase', 'NONE', 'Back in the day, I used to be worth Â£300-Â£400! \n I was so popular that they had to increase my price immediately after I was put on sale.\nNowadays, I''m sold for Â£100-Â£200 but you will only find me on eBay.'),
+       ('56', 'GetPurchase', 'NONE', 'Back in the day, I used to be worth £300-£400! \n I was so popular that they had to increase my price immediately after I was put on sale.\nNowadays, I''m sold for £100-£200 but you will only find me on eBay.'),
        ('56', 'GetCreator', 'NONE', 'I was created by ''Acorn Computers'' which is sometimes referred to as the British Apple... well, according to the Acorn Engineers anyway!'),
        ('56', 'GetCreator', 'Team', 'I was created by the Acorn team - namely Sophie Wilson and Steve Furber. As motivation, they were both told that the other had agreed that they could prototype me in a week. Surprisingly this trick paid off!'),
        ('56', 'GetCreator', 'Steve Furber', 'My Creator - Steve Furber, who now works at the University of Manchester - is well known for making me, and developing the ARM 32-bit RISC microprocessor.\nHe studied Maths at St. John''s College Cambridge.'),
@@ -44,7 +43,7 @@ INSERT INTO responses VALUES
 
 INSERT INTO suggestions VALUES
        ('56', 'Please avoid small talk. Us, robots, find it too unentertaining to partake in.'),
-       ('56', 'Try to keep question simple. Iâ€™ve only recently learnt English.'),
+       ('56', 'Try to keep question simple. I’ve only recently learnt English.'),
        ('56', 'Want to find out who created me, or when they did it? Just ask.'),
        ('56', 'What to find out why I was made, or how successful I was? Go ahead and ask.'),
        ('56', 'I only possess information relating to myself. Asking me the meaning of life or the square root of pi is pointless (p.s.: 1.77245 to 5 d.p.).'),
