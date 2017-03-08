@@ -1,13 +1,13 @@
 package uk.ac.cam.cl.historyphone;
 
-import com.sun.net.httpserver.HttpHandler;
-import com.sun.net.httpserver.HttpExchange;
-import java.net.URI;
-import java.util.Map;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URI;
 import java.sql.SQLException;
+import java.util.Map;
+
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
 
 /*
 'ApiHandler' is a class that handles all the http requests from the app to the server
@@ -24,10 +24,14 @@ class ApiHandler implements HttpHandler {
 	private Database database;
 	private IntentExtractor intentExtractor;
 
+	private Responder responder;
+	
 	public ApiHandler(Server s, Database db, IntentExtractor ie) {
 		server = s;
 		database = db;
 		intentExtractor = ie;
+
+		responder = new LuisResponder(ie, db);
 	}
 
 	private void sendResponse(HttpExchange ex, int statusCode, ApiResponse resp) throws IOException {
@@ -97,24 +101,7 @@ class ApiHandler implements HttpHandler {
 			}
 		}
 
-		//intentExtractor will return a DBQuery which holds the top intent and the top relevant entity (if present)
-		DBQuery dBQ;
-		try {
-			dBQ = intentExtractor.getDBQ(uuid, message);
-		} catch (RemoteQueryException r) {
-				response = "Sorry I'm having a problem with getting to LUIS";
-				sendResponse(ex, 200, new ChatResponse(response));
-				return;
-		}
-
-		//retrieve the response.
-		try {
-			response = database.getResponse(uuid, dBQ);
-		} catch (SQLException s) {
-			s.printStackTrace();
-		} catch (LookupException l) {
-			response = "I can't understand sorry :(";
-		}
+		response = responder.getResponse(uuid, message);
 		if (response == null) {
 			//prompt user to rephrase...
 			sendResponse(ex, 200, new ChatResponse("Sorry I don't understand - please rephrase the question!"));
@@ -166,6 +153,36 @@ class ApiHandler implements HttpHandler {
 				} catch(NumberFormatException e) {
 					sendResponse(ex, 400, new ErrorResponse("Could not parse ID " + params.get("id")));
 				}
+			} else if(method.equals("/api/sethandler")) {
+				String type = params.get("type");
+				if(type == null) {
+					System.err.println("Tried to switch handler without parameters");
+				}
+				if(type.equals("luis")) {
+					System.err.println("Switching to LUIS responder...");
+					responder = new LuisResponder(intentExtractor, database);
+				} else if(type.equals("manual")) {
+					try {
+						System.err.println("Switching to manual responder...");
+						if(params.get("port") == null) {
+							System.err.println("no port");
+							throw new NumberFormatException(); // hack
+						}
+						
+						int port = Integer.parseInt(params.get("port"));
+						if(port == -1) {
+							System.err.println("Cannot recognise port number, aborting");
+						} else {
+							responder = new ManualResponder(port);
+						}
+					} catch(NumberFormatException e) {
+						System.err.println(String.format("Cannot recognise port number, aborting"));
+					}
+				} else {
+					System.err.println("Tried to switch to non-existent handler!");
+				}
+
+				sendResponse(ex, 200, new ErrorResponse("dummy error, does not matter"));
 			} else {
 				sendResponse(ex, 404, new ErrorResponse("Nonexistent API call " + method));
 			}
